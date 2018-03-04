@@ -3,6 +3,7 @@
 #include <queue>
 #include <string>
 #include <map>
+#include <sstream>
 using namespace std;
 struct LanSegment{
 	string name;
@@ -18,6 +19,14 @@ struct Message{
 	void print(){
 		cout<<"("<<RootID<<","<<Distance<<","<<Sender<<")"<<endl;
 	}
+};
+struct Packet{
+	int id;
+	int time;
+	string source;
+	string destination;
+	string lan;
+	Packet(int,int,string,string,string);
 };
 struct Received{
 	int id;
@@ -39,7 +48,7 @@ class Bridge{
 	void PopulateBridge(string,vector<pair<string,bool> >);
 	void ReceiveConfigMessage(Message,int,string,Bridge[],queue<Received>&,bool,map<string,LanSegment>&);
 	void SendConfigMessage(Bridge[],queue<Received>&,bool,map<string,LanSegment>&);
-	void ForwardMessage(string,string,map<string,string>,string);
+	void ForwardMessage(string,string,string,Bridge[],map<string,LanSegment>&,queue<Packet>&,int);
 
 
 };
